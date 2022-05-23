@@ -67,8 +67,8 @@ jobs:
 
       - name: Update Glue job
         run: |
-          aws glue update-job --job-name "Traffic ETL" --job-update \
-            "Role=AWSGlueServiceRole-TrafficCrawler,Command={Name=glueetl,ScriptLocation=s3://${{secrets.S3_BUCKET}}/traffic_${GITHUB_SHA}.py},Connections={Connections=redshift}" \
+          aws glue update-job --job-name "ETL TEST" --job-update \
+            "Role=AWSGlueServiceRole-ETLTestCrawler,Command={Name=glueetl,ScriptLocation=s3://${{secrets.S3_BUCKET}}/traffic_${GITHUB_SHA}.py},Connections={Connections=redshift}" \
             --region us-east-1
       
 
