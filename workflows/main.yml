@@ -62,13 +62,13 @@ jobs:
           
 
       - name: Upload to S3
-        run: aws s3 cp traffic.py s3://${{secrets.S3_BUCKET}}/traffic_${GITHUB_SHA}.py --region us-east-1
+        run: aws s3 cp etl_test.py s3://${{secrets.S3_BUCKET}}/etl_test_${GITHUB_SHA}.py --region us-east-1
       
 
       - name: Update Glue job
         run: |
           aws glue update-job --job-name "ETL TEST" --job-update \
-            "Role=AWSGlueServiceRole-ETLTestCrawler,Command={Name=glueetl,ScriptLocation=s3://${{secrets.S3_BUCKET}}/traffic_${GITHUB_SHA}.py},Connections={Connections=redshift}" \
+            "Role=AWSGlueServiceRole-ETLTestCrawler,Command={Name=glueetl,ScriptLocation=s3://${{secrets.S3_BUCKET}}/etl_test_${GITHUB_SHA}.py},Connections={Connections=redshift}" \
             --region us-east-1
       
 
